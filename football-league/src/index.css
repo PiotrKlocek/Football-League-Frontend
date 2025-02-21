@@ -1,0 +1,19 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+
+body {
+
+  background: linear-gradient(#2A00B7,#42006C);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+}
