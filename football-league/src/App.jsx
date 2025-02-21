@@ -1,17 +1,17 @@
-
 import React from 'react';
-import './App.css';
-import LoginForm from './components/LoginForm/LoginForm.jsx';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginForm from './components/LoginForm/LoginForm';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
-
-
     return (
-        <div className="App">
-            <LoginForm />
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<LoginForm />} />
+                <Route path="/homepage" element={<HomePage />} />
+            </Routes>
+        </Router>
     );
 }
 
-export default App
+export default App;

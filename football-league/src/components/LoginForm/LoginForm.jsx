@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import './LoginForm.css';
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 const LoginForm = () => {
+
     const [action, setAction] = useState('Login');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    let navigate = useNavigate();
+
 
     const handleSubmit = async () => {
         if (action !== "Sign Up") return;
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         const userData = {
             firstName,
             lastName,
             email,
-            password
+            password: hashedPassword
         };
 
         try {
@@ -58,12 +66,10 @@ const LoginForm = () => {
             }
 
             const users = await response.json();
+            const user = users.find(user => user.email === email);
 
-            const user = users.find(user => user.email === email && user.password === password && user.email !== null && user.password !== null);
-
-            if (user) {
-                alert('Login successful!');
-
+            if (user && await bcrypt.compare(password, user.password)) {
+                navigate('/homepage');
             } else {
                 alert('Invalid email or password');
             }
@@ -128,7 +134,6 @@ const LoginForm = () => {
             {action === "Sign Up" ? null : (
                 <div className="forgot-password">
                     Forgot Password? <span>Click Here</span>
-
                 </div>
             )}
 
