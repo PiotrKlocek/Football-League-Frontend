@@ -1,7 +1,12 @@
-
 import './HomePage.css';
+import Navbar from "../Navbar/Navbar.jsx";
 
-const HomePage = () =>{
+const HomePage = () => {
+    return (
+        <>
+            <Navbar />
+        </>
+    );
+};
 
-}
-export default HomePage
+export default HomePage;
