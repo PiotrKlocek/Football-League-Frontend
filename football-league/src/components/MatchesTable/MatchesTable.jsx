@@ -9,7 +9,7 @@ const leagueIcons = {
     "Ligue 1": "/public/Ligue1-logo.png",
 };
 
-const MatchesTable = () => {
+const MatchesTable = ({ theme }) => {
     const [matches, setMatches] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const matchesPerPage = 3;
@@ -24,19 +24,16 @@ const MatchesTable = () => {
             .catch((error) => console.error("Błąd podczas pobierania danych:", error));
     }, []);
 
-    // Obliczanie indeksów meczów, które mają być wyświetlone na bieżącej stronie
     const indexOfLastMatch = currentPage * matchesPerPage;
     const indexOfFirstMatch = indexOfLastMatch - matchesPerPage;
     const currentMatches = matches.slice(indexOfFirstMatch, indexOfLastMatch);
 
-    // Przejście na poprzednią stronę
     const handlePrevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
     };
 
-    // Przejście na następną stronę
     const handleNextPage = () => {
         if (currentPage < Math.ceil(matches.length / matchesPerPage)) {
             setCurrentPage(currentPage + 1);
@@ -44,10 +41,10 @@ const MatchesTable = () => {
     };
 
     return (
-        <div className="main-container">
-            <div className="matches-container">
+        <div className={`main-container ${theme}`}>
+            <div className={`matches-container ${theme}`}>
                 {currentMatches.map((match) => (
-                    <div key={match.id} className="match">
+                    <div key={match.id} className={`match ${theme}`}>
                         <div className="league">
                             <img
                                 src={leagueIcons[match.league.name]}
@@ -57,7 +54,7 @@ const MatchesTable = () => {
                             <span className="league-name">{match.league.name}</span>
                         </div>
 
-                        <div className="match-result">
+                        <div className={`match-result ${theme}`}>
                             <span className="team-name">{match.team1.name}</span>
                             <span className="score">{match.team1Score} - {match.team2Score}</span>
                             <span className="team-name">{match.team2.name}</span>
@@ -68,7 +65,7 @@ const MatchesTable = () => {
                             <p><strong>Boisko:</strong> {match.pitch.name}</p>
                         </div>
 
-                        <div className="match-date">
+                        <div className={`match-date ${theme}`}>
                             <strong>Data:</strong> {new Date(match.matchDate).toLocaleString()}
                         </div>
 
@@ -78,9 +75,9 @@ const MatchesTable = () => {
             </div>
 
             <div className="pagination">
-                <button className="pagination-btn" onClick={handlePrevPage}>&lt; Prev</button>
-                <span>{`Strona ${currentPage} z ${Math.ceil(matches.length / matchesPerPage)}`}</span>
-                <button className="pagination-btn" onClick={handleNextPage}>Next &gt;</button>
+                <button className="pagination-btn" onClick={handlePrevPage}>Prev</button>
+
+                <button className="pagination-btn" onClick={handleNextPage}>Next</button>
             </div>
         </div>
     );
