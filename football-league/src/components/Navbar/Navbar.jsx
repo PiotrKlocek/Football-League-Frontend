@@ -1,20 +1,28 @@
 import React, {useState} from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { FaMoon } from 'react-icons/fa';
+import { IoMdLogOut } from "react-icons/io";
 import './Navbar.css';
-import soccerLogo from "../../assets/ball2.png";
+import {useNavigate} from "react-router-dom";
+
+
 
 
 const Navbar = () => {
+    let navigate = useNavigate();
     const [theme,setTheme] = useState('light');
 
     const toggle_mode = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light');
     }
 
+    const logout = () => {
+        navigate("/");
+    }
+
     return (
         <div className={`navbar ${theme}`}>
-            <img src={soccerLogo} alt="Soccer logo" className="logo" />
+            <IoMdLogOut className="logout-icon" onClick={logout} />
             <ul>
                 <li>Home</li>
                 <li>League</li>

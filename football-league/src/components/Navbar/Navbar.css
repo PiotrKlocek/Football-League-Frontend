@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
     margin: 0;
@@ -11,19 +12,18 @@
     text-decoration: none;
 }
 
+
 .navbar {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 4%;
+    font-family: 'Poppins', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.logo {
-    width: 80px;
-    cursor: pointer;
-}
+
 
 ul {
     flex: 1;
@@ -35,6 +35,17 @@ ul li {
     display: inline-block;
     margin: 10px 20px;
     font-size: 18px;
+    position: relative;
+}
+.navbar.light ul li:not(:last-child) {
+    border-right: 2px solid;
+    padding-right: 20px;
+    color: #333333;
+}
+.navbar.dark ul li:not(:last-child) {
+    border-right: 2px solid;
+    padding-right: 20px;
+    color: #eaeaea;
 }
 
 .search-box {
@@ -110,4 +121,17 @@ ul li {
     font-size: 28px;
     cursor: pointer;
     margin-left: 45px;
+}
+.logout-icon{
+
+    font-size: 34px;
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.navbar.light .logout-icon{
+    color:black;
+}
+.navbar.black .logout-icon{
+    color: #eaeaea;
 }
