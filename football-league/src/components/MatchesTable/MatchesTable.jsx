@@ -4,23 +4,34 @@ import "./MatchesTable.css";
 const leagueIcons = {
     "Premier League": "/public/premier-league-logo.png",
     "La Liga": "/public/la-liga-logo.png",
-    "Serie A": "/images/serie-a-icon.png",
+    "Serie A": "/public/serie-a-logo.png",
+    "Bundesliga": "/public/bundesliga-logo.png",
+    "Ligue 1": "/public/Ligue1-logo.png",
+
 
 };
+
+
+
+
 
 const MatchesTable = () => {
     const [matches, setMatches] = useState([]);
 
+
+
+
     useEffect(() => {
         fetch("http://localhost:8080/api/match")
             .then((response) => response.json())
-            .then((data) => setMatches(data))
+            .then((data) => {setMatches(data)
+                console.log(data);})
             .catch((error) => console.error("Błąd podczas pobierania danych:", error));
     }, []);
 
     return (
-        <div className="matches-container">
-            <h2>Mecze</h2>
+        <div className= {`matches-container`}>
+
             {matches.map((match) => (
                 <div key={match.id} className="match">
 
@@ -40,7 +51,7 @@ const MatchesTable = () => {
                     </div>
 
                     <div className="match-details">
-                        <p><strong>Sędzia:</strong> {match.referee.name}</p>
+                        <p><strong>Sędzia:</strong> {match.referee.firstName + " " + match.referee.lastName} </p>
                         <p><strong>Boisko:</strong> {match.pitch.name}</p>
                     </div>
 
