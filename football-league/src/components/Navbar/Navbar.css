@@ -36,6 +36,7 @@ ul li {
     margin: 10px 20px;
     font-size: 18px;
     position: relative;
+    cursor: pointer;
 }
 .navbar.light ul li:not(:last-child) {
     border-right: 2px solid;

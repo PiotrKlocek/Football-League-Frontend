@@ -20,11 +20,16 @@ const Navbar = () => {
         navigate("/");
     }
 
+    const home = () =>{
+        navigate("/homepage");
+
+    }
+
     return (
         <div className={`navbar ${theme}`}>
             <IoMdLogOut className="logout-icon" onClick={logout} />
             <ul>
-                <li>Home</li>
+                <li onClick={home}>Home</li>
                 <li>League</li>
                 <li>Players</li>
             </ul>
