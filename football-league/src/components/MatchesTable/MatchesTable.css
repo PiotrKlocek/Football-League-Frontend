@@ -1,14 +1,28 @@
+.main-container {
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 12px;
+    width: 600px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
 .matches-container {
-    padding: 20px;
+
     align-items: center;
     justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
 
+}
 
 .match {
     background-color: #f8f8f8;
@@ -25,8 +39,8 @@
 }
 
 .league-icon {
-    width: 24px;
-    height: 24px;
+    width: 50px;
+    height: 40px;
     margin-right: 10px;
 }
 
@@ -62,4 +76,26 @@
 
 hr {
     border: 1px solid #ddd;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.pagination-btn:hover {
+    background-color: #0056b3;
 }

@@ -7,61 +7,81 @@ const leagueIcons = {
     "Serie A": "/public/serie-a-logo.png",
     "Bundesliga": "/public/bundesliga-logo.png",
     "Ligue 1": "/public/Ligue1-logo.png",
-
-
 };
-
-
-
-
 
 const MatchesTable = () => {
     const [matches, setMatches] = useState([]);
-
-
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const matchesPerPage = 3;
 
     useEffect(() => {
         fetch("http://localhost:8080/api/match")
             .then((response) => response.json())
-            .then((data) => {setMatches(data)
-                console.log(data);})
+            .then((data) => {
+                setMatches(data);
+                console.log(data);
+            })
             .catch((error) => console.error("Błąd podczas pobierania danych:", error));
     }, []);
 
+    // Obliczanie indeksów meczów, które mają być wyświetlone na bieżącej stronie
+    const indexOfLastMatch = currentPage * matchesPerPage;
+    const indexOfFirstMatch = indexOfLastMatch - matchesPerPage;
+    const currentMatches = matches.slice(indexOfFirstMatch, indexOfLastMatch);
+
+    // Przejście na poprzednią stronę
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    // Przejście na następną stronę
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(matches.length / matchesPerPage)) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
     return (
-        <div className= {`matches-container`}>
+        <div className="main-container">
+            <div className="matches-container">
+                {currentMatches.map((match) => (
+                    <div key={match.id} className="match">
+                        <div className="league">
+                            <img
+                                src={leagueIcons[match.league.name]}
+                                alt={match.league.name}
+                                className="league-icon"
+                            />
+                            <span className="league-name">{match.league.name}</span>
+                        </div>
 
-            {matches.map((match) => (
-                <div key={match.id} className="match">
+                        <div className="match-result">
+                            <span className="team-name">{match.team1.name}</span>
+                            <span className="score">{match.team1Score} - {match.team2Score}</span>
+                            <span className="team-name">{match.team2.name}</span>
+                        </div>
 
-                    <div className="league">
-                        <img
-                            src={leagueIcons[match.league.name]}
-                            alt={match.league.name}
-                            className="league-icon"
-                        />
-                        <span className="league-name">{match.league.name}</span>
+                        <div className="match-details">
+                            <p><strong>Sędzia:</strong> {match.referee.firstName + " " + match.referee.lastName} </p>
+                            <p><strong>Boisko:</strong> {match.pitch.name}</p>
+                        </div>
+
+                        <div className="match-date">
+                            <strong>Data:</strong> {new Date(match.matchDate).toLocaleString()}
+                        </div>
+
+                        <hr />
                     </div>
+                ))}
+            </div>
 
-                    <div className="match-result">
-                        <span className="team-name">{match.team1.name}</span>
-                        <span className="score">{match.team1Score} - {match.team2Score}</span>
-                        <span className="team-name">{match.team2.name}</span>
-                    </div>
-
-                    <div className="match-details">
-                        <p><strong>Sędzia:</strong> {match.referee.firstName + " " + match.referee.lastName} </p>
-                        <p><strong>Boisko:</strong> {match.pitch.name}</p>
-                    </div>
-
-                    <div className="match-date">
-                        <strong>Data:</strong> {new Date(match.matchDate).toLocaleString()}
-                    </div>
-
-                    <hr />
-                </div>
-            ))}
+            <div className="pagination">
+                <button className="pagination-btn" onClick={handlePrevPage}>&lt; Prev</button>
+                <span>{`Strona ${currentPage} z ${Math.ceil(matches.length / matchesPerPage)}`}</span>
+                <button className="pagination-btn" onClick={handleNextPage}>Next &gt;</button>
+            </div>
         </div>
     );
 };
