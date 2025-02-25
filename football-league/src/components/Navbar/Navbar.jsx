@@ -4,8 +4,6 @@ import { IoMdLogOut } from "react-icons/io";
 import './Navbar.css';
 import { useNavigate } from "react-router-dom";
 
-import { IoHomeOutline } from "react-icons/io5";
-
 
 
 const Navbar = ({ setTheme }) => {
@@ -30,8 +28,8 @@ const Navbar = ({ setTheme }) => {
         <div className={`navbar ${theme}`}>
             <IoMdLogOut className="logout-icon" onClick={logout} />
             <ul>
-                <li onClick={home}> <IoHomeOutline /> Home</li>
-                <li>Leagues</li>
+                <li onClick={home}> Home</li>
+                <li >Leagues </li>
                 <li>Players</li>
                 <li>Referees </li>
             </ul>

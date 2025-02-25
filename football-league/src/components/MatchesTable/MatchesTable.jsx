@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MatchesTable.css";
-
+import { GrFormNextLink } from "react-icons/gr";
+import { GrFormPreviousLink } from "react-icons/gr";
 const leagueIcons = {
     "Premier League": "/public/premier-league-logo.png",
     "La Liga": "/public/la-liga-logo.png",
@@ -42,6 +43,7 @@ const MatchesTable = ({ theme }) => {
 
     return (
         <div className={`main-container ${theme}`}>
+
             <div className={`matches-container ${theme}`}>
                 {currentMatches.map((match) => (
                     <div key={match.id} className={`match ${theme}`}>
@@ -61,8 +63,8 @@ const MatchesTable = ({ theme }) => {
                         </div>
 
                         <div className="match-details">
-                            <p><strong>Sędzia:</strong> {match.referee.firstName + " " + match.referee.lastName} </p>
-                            <p><strong>Boisko:</strong> {match.pitch.name}</p>
+                            <p><strong>Referee:</strong> {match.referee.firstName + " " + match.referee.lastName} </p>
+                            <p><strong>Pitch:</strong> {match.pitch.name}</p>
                         </div>
 
                         <div className={`match-date ${theme}`}>
@@ -75,9 +77,9 @@ const MatchesTable = ({ theme }) => {
             </div>
 
             <div className="pagination">
-                <button className="pagination-btn" onClick={handlePrevPage}>Prev</button>
+                <button className="pagination-btn" onClick={handlePrevPage}><GrFormPreviousLink/></button>
 
-                <button className="pagination-btn" onClick={handleNextPage}>Next</button>
+                <button className="pagination-btn" onClick={handleNextPage}><GrFormNextLink /></button>
             </div>
         </div>
     );
