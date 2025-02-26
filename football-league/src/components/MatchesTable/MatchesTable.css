@@ -5,7 +5,6 @@
     border-radius: 12px;
     width: 550px;
     height: 700px;
-
     justify-content: center;
     align-items: center;
     margin-left: auto;
@@ -24,21 +23,16 @@
     gap:10px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-
 }
 
 .match {
     display: flex;
-
     flex-direction: column;
     justify-content: space-between;
-
     width: 500px;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-
-
 }
 .match:first-child{
     margin-top: 15px;
@@ -183,8 +177,6 @@ hr {
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .pagination-btn:disabled {
     cursor: not-allowed;

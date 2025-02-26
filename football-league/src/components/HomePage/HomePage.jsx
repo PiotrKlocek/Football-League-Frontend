@@ -6,8 +6,6 @@ import StandingsTable from "../StandingsTable/StandingsTable.jsx";
 
 const HomePage = () => {
     const [theme, setTheme] = useState('dark');
-
-
     return (
         <>
             <Navbar theme={theme} setTheme={setTheme} />
@@ -16,5 +14,4 @@ const HomePage = () => {
         </>
     );
 };
-
 export default HomePage;
