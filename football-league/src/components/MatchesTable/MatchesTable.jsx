@@ -8,7 +8,8 @@ const leagueIcons = {
     "Serie A": "/public/serie-a-logo.png",
     "Bundesliga": "/public/bundesliga-logo.png",
     "Ligue 1": "/public/Ligue1-logo.png",
-    "Champions League" : "/uefa-champions-league.png"
+    "Champions League" : "/uefa-champions-league.png",
+    "Ekstraklasa" : "/ekstraklasa.png"
 };
 
 // eslint-disable-next-line react/prop-types

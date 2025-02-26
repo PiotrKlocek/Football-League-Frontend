@@ -24,12 +24,16 @@ const Navbar = ({ setTheme }) => {
         navigate("/homepage");
     };
 
+    const leagues = () => {
+        navigate("/leagues");
+    };
+
     return (
         <div className={`navbar ${theme}`}>
             <IoMdLogOut className="logout-icon" onClick={logout} />
             <ul>
                 <li onClick={home}> Home</li>
-                <li >Leagues </li>
+                <li onClick={leagues}>Leagues </li>
                 <li>Players</li>
                 <li>Referees </li>
             </ul>
