@@ -12,7 +12,6 @@ const leagueIcons = {
     "Ekstraklasa" : "/ekstraklasa.png"
 };
 
-// eslint-disable-next-line react/prop-types
 const MatchesTable = ({ theme }) => {
     const [matches, setMatches] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
