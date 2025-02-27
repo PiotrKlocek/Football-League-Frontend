@@ -20,7 +20,7 @@ const Navbar = ({ setTheme }) => {
     const home = () => navigate("/homepage");
     const leagues = () => navigate("/leagues");
 
-    //Testy
+
     const handleSearch = async (e) => {
         setSearchTerm(e.target.value);
         if (e.target.value.length > 2) {
