@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Leagues.css";
+import Navbar from "../Navbar/Navbar";
 
 const leagueIcons = {
     "Premier League": "/public/premier-league-logo.png",
@@ -11,15 +12,12 @@ const leagueIcons = {
     "Ekstraklasa" : "/ekstraklasa.png"
 };
 
-
 const LeagueCard = ({ league, theme }) => {
     const [emblemUrl, setEmblemUrl] = useState(null);
 
     useEffect(() => {
         setEmblemUrl(leagueIcons[league.name] || "/no-image.png");
     }, [league.name]);
-
-
 
     return (
         <div className={`league-card ${theme}`}>
@@ -41,6 +39,7 @@ const LeagueCard = ({ league, theme }) => {
 
 const Leagues = () => {
     const [leagues, setLeagues] = useState([]);
+    const [theme, setTheme] = useState("dark");  // Add state for theme
 
     const fetchLeagues = useCallback(async () => {
         try {
@@ -55,18 +54,18 @@ const Leagues = () => {
         }
     }, []);
 
-
-
     useEffect(() => {
         fetchLeagues();
     }, [fetchLeagues]);
 
     return (
-
-        <div className="leagues-container">
-            {leagues.map((league) => (
-                <LeagueCard key={league.id} league={league} theme="light" />
-            ))}
+        <div>
+            <Navbar theme={theme} setTheme={setTheme} />
+            <div className="leagues-container">
+                {leagues.map((league) => (
+                    <LeagueCard key={league.id} league={league} theme={theme} />
+                ))}
+            </div>
         </div>
     );
 };

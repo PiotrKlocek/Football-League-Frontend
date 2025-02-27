@@ -1,4 +1,4 @@
-/* leagues.css */
+
 .leagues-container {
     display: flex;
     flex-wrap: wrap;
@@ -14,15 +14,17 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     transition: background-color 0.3s ease;
+
 }
 
 .league-card.dark {
     background-color: #333;
+    color: #eaeaea;
 }
 
 .league-card:hover {
     background-color: #f0f0f0;
-
+    color:#333333;
 }
 
 .league-content {
@@ -65,5 +67,6 @@ p {
     background-color: #888;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+
 }
 
