@@ -42,6 +42,7 @@ const Navbar = ({ setTheme }) => {
             <ul>
                 <li onClick={home}>Home</li>
                 <li onClick={leagues}>Leagues</li>
+                <li>Teams</li>
                 <li>Players</li>
                 <li>Referees</li>
             </ul>
