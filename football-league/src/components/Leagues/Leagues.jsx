@@ -8,38 +8,15 @@ const leagueIcons = {
     "Serie A": "/public/serie-a-logo.png",
     "Bundesliga": "/public/bundesliga-logo.png",
     "Ligue 1": "/public/Ligue1-logo.png",
-    "Champions League" : "/uefa-champions-league.png",
-    "Ekstraklasa" : "/ekstraklasa.png"
-};
-
-const LeagueCard = ({ league, theme }) => {
-    const [emblemUrl, setEmblemUrl] = useState(null);
-
-    useEffect(() => {
-        setEmblemUrl(leagueIcons[league.name] || "/no-image.png");
-    }, [league.name]);
-
-    return (
-        <div className={`league-card ${theme}`}>
-            <div className="league-content">
-                <img
-                    src={emblemUrl}
-                    alt={league.name}
-                    className="league-emblem"
-                    onError={(e) => (e.target.src = "/no-image.png")}
-                />
-                <div className="league-details">
-                    <h2>{league.name}</h2>
-                    <p>{league.season || "Brak opisu"}</p>
-                </div>
-            </div>
-        </div>
-    );
+    "Champions League": "/uefa-champions-league.png",
+    "Ekstraklasa": "/ekstraklasa.png"
 };
 
 const Leagues = () => {
     const [leagues, setLeagues] = useState([]);
-    const [theme, setTheme] = useState("dark");  // Add state for theme
+    const [standings, setStandings] = useState([]);
+    const [selectedLeague, setSelectedLeague] = useState(null);
+    const [theme, setTheme] = useState("dark");
 
     const fetchLeagues = useCallback(async () => {
         try {
@@ -49,6 +26,21 @@ const Leagues = () => {
             }
             const data = await response.json();
             setLeagues(data);
+            setSelectedLeague(data[0]);
+        } catch (error) {
+            console.error("Błąd pobierania danych:", error);
+        }
+    }, []);
+
+    const fetchStandings = useCallback(async () => {
+        try {
+            const response = await fetch("http://localhost:8080/api/standing");
+            if (!response.ok) {
+                throw new Error(`Błąd pobierania danych: ${response.status}`);
+            }
+            const data = await response.json();
+            setStandings(data);
+            console.log(data);
         } catch (error) {
             console.error("Błąd pobierania danych:", error);
         }
@@ -56,15 +48,60 @@ const Leagues = () => {
 
     useEffect(() => {
         fetchLeagues();
-    }, [fetchLeagues]);
+        fetchStandings();
+    }, [fetchLeagues, fetchStandings]);
+
+    const selectedLeagueStandings = selectedLeague
+        ? standings.filter(standing => standing.league.id === selectedLeague.id)
+        : [];
 
     return (
         <div>
             <Navbar theme={theme} setTheme={setTheme} />
-            <div className="leagues-container">
-                {leagues.map((league) => (
-                    <LeagueCard key={league.id} league={league} theme={theme} />
-                ))}
+            <div className="league-container">
+                <div className="league-selector">
+                    <label>Wybierz ligę: </label>
+                    <select onChange={(e) => setSelectedLeague(leagues.find(l => l.name === e.target.value))}>
+                        {leagues.map((league) => (
+                            <option key={league.id} value={league.name}>{league.name}</option>
+                        ))}
+                    </select>
+                </div>
+                {selectedLeague && (
+                    <div className="league-table">
+                        <h2>{selectedLeague.name}</h2>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Pozycja</th>
+                                <th>Drużyna</th>
+                                <th>Mecze</th>
+                                <th>Wygrane</th>
+                                <th>Remisy</th>
+                                <th>Porażki</th>
+                                <th>Strzelone</th>
+                                <th>Stracone</th>
+                                <th>Punkty</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {selectedLeagueStandings.map((standing, index) => (
+                                <tr key={standing.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{standing.team.name}</td>
+                                    <td>{standing.matchesPlayed}</td>
+                                    <td>{standing.wins}</td>
+                                    <td>{standing.draws}</td>
+                                    <td>{standing.losses}</td>
+                                    <td>{standing.goalsScored}</td>
+                                    <td>{standing.goalsConceded}</td>
+                                    <td>{standing.points}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );
