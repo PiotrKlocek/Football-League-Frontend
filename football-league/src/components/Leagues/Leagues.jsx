@@ -58,7 +58,7 @@ const Leagues = () => {
     return (
         <div>
             <Navbar theme={theme} setTheme={setTheme} />
-            <div className="league-container">
+            <div className={`league-container ${theme}`}>
                 <div className="league-selector">
                     <label>Wybierz ligę: </label>
                     <select onChange={(e) => setSelectedLeague(leagues.find(l => l.name === e.target.value))}>
@@ -68,7 +68,7 @@ const Leagues = () => {
                     </select>
                 </div>
                 {selectedLeague && (
-                    <div className="league-table">
+                    <div className= {`league-table ${theme}`}>
                         <h2>{selectedLeague.name}</h2>
                         <table>
                             <thead>
@@ -85,7 +85,7 @@ const Leagues = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {selectedLeagueStandings.map((standing, index) => (
+                            {selectedLeagueStandings.sort((a, b) => b.points - a.points).map((standing, index) => (
                                 <tr key={standing.id}>
                                     <td>{index + 1}</td>
                                     <td>{standing.team.name}</td>

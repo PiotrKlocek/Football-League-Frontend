@@ -7,10 +7,10 @@
     padding: 20px;
     background-color: #1e1e1e;
     color: #ffffff;
-    font-family: Arial, sans-serif;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -37,8 +37,13 @@
 }
 
 
-.league-table {
+.league-table.dark {
     background-color: #292929;
+    padding: 20px;
+    border-radius: 10px;
+}
+.league-table.light{
+    background-color: #eaeaea;
     padding: 20px;
     border-radius: 10px;
 }
@@ -55,10 +60,8 @@
 
 .league-table th,
 .league-table td {
-    border: 1px solid #444;
     padding: 10px;
     text-align: center;
-    border-right: 2px solid white;
 }
 
 .league-table th:last-child,
@@ -67,8 +70,49 @@
 }
 
 .league-table tr {
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #ffffff;
+    background-color: #eaeaea;
+    color: #292929;
+    font-weight: 550;
 }
+.league-table tr:hover{
+    background-color: #e0dede;
+    cursor: pointer;
+}
+
 .league-table th {
-    background-color: #444;
+    background-color: #4c00b4;
+    color: #eaeaea;
+}
+.league-table th:last-child{
+    border-top-right-radius: 5px;
+}
+.league-table th:first-child{
+    border-top-left-radius: 5px;
+}
+.team-name{
+    text-align: right;
+}
+
+.league-container.light {
+    background-color: #f5f5f5;
+    color: #292929;
+}
+
+.league-table.light th {
+    background-color: #eaeaea;
+    color: #292929;
+}
+
+.league-table.light td {
+    color: #292929;
+}
+
+.league-table.light tr {
+    background-color: #ffffff;
+}
+
+.league-table.light tr:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
 }

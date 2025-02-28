@@ -133,7 +133,7 @@ const LoginForm = () => {
 
             {action === "Sign Up" ? null : (
                 <div className="forgot-password">
-                    Forgot Password? <span>Click Here</span>
+                    Forgot Password?<span> Click Here</span>
                 </div>
             )}
 
