@@ -39,7 +39,7 @@ const Navbar = ({ setTheme }) => {
     return (
         <div className={`navbar ${theme}`}>
             <IoMdLogOut className="logout-icon" onClick={logout} />
-            <ul>
+            <ul className="links">
                 <li onClick={home}>Home</li>
                 <li onClick={leagues}>Leagues</li>
                 <li>Teams</li>

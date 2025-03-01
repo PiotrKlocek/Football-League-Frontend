@@ -1,5 +1,5 @@
 .main-container {
-    background-color: #f9f9f9;
+    background-color: #e8e8e8;
     color: #333;
     width: 90%;
     max-width: 1200px;
@@ -43,7 +43,7 @@
 }
 
 .match:hover {
-    background-color: #fff;
+    background-color: #f3f1f1;
 }
 
 .match.dark {
@@ -126,7 +126,6 @@
 
 .match-details,
 .match-date {
-    color: white;
     font-size: 0.9em;
     margin-top: auto;
     margin-bottom: 10px;

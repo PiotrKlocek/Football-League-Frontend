@@ -68,12 +68,12 @@ const Leagues = () => {
                     </select>
                 </div>
                 {selectedLeague && (
-                    <div className= {`league-table ${theme}`}>
+                    <div className={`league-table ${theme}`}>
                         <h2>{selectedLeague.name}</h2>
                         <table>
                             <thead>
                             <tr>
-                                <th>Pozycja</th>
+                                <th>#</th>
                                 <th>Drużyna</th>
                                 <th>Mecze</th>
                                 <th>Wygrane</th>
@@ -85,20 +85,39 @@ const Leagues = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {selectedLeagueStandings.sort((a, b) => b.points - a.points).map((standing, index) => (
-                                <tr key={standing.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{standing.team.name}</td>
-                                    <td>{standing.matchesPlayed}</td>
-                                    <td>{standing.wins}</td>
-                                    <td>{standing.draws}</td>
-                                    <td>{standing.losses}</td>
-                                    <td>{standing.goalsScored}</td>
-                                    <td>{standing.goalsConceded}</td>
-                                    <td>{standing.points}</td>
-                                </tr>
-                            ))}
+                            {selectedLeagueStandings.sort((a, b) => b.points - a.points).map((standing, index) => {
+                                const position = index + 1;
+                                let positionClass = "";
+
+                                if (position <= 3) {
+                                    positionClass = "top-three";
+                                } else if (position === 4) {
+                                    positionClass = "fourth-place";
+                                } else if (position >= selectedLeagueStandings.length - 2) {
+                                    positionClass = "bottom-three";
+                                } else {
+                                    positionClass = "other-place"
+                                }
+
+
+                                return (
+                                    <tr key={standing.id}>
+                                        <td>
+                                            <span className={`position-circle ${positionClass}`}>{position}</span>
+                                        </td>
+                                        <td>{standing.team.name}</td>
+                                        <td>{standing.matchesPlayed}</td>
+                                        <td>{standing.wins}</td>
+                                        <td>{standing.draws}</td>
+                                        <td>{standing.losses}</td>
+                                        <td>{standing.goalsScored}</td>
+                                        <td>{standing.goalsConceded}</td>
+                                        <td>{standing.points}</td>
+                                    </tr>
+                                );
+                            })}
                             </tbody>
+
                         </table>
                     </div>
                 )}
