@@ -8,8 +8,8 @@ const leagueIcons = {
     "Serie A": "/public/serie-a-logo.png",
     "Bundesliga": "/public/bundesliga-logo.png",
     "Ligue 1": "/public/Ligue1-logo.png",
-    "Champions League": "/uefa-champions-league.png",
-    "Ekstraklasa": "/ekstraklasa.png"
+    "Champions League": "/public/uefa-champions-league.png",
+    "Ekstraklasa": "/public/ekstraklasa.png"
 };
 
 const Leagues = () => {
@@ -40,7 +40,6 @@ const Leagues = () => {
             }
             const data = await response.json();
             setStandings(data);
-            console.log(data);
         } catch (error) {
             console.error("Błąd pobierania danych:", error);
         }
@@ -63,13 +62,18 @@ const Leagues = () => {
                     <label>Wybierz ligę: </label>
                     <select onChange={(e) => setSelectedLeague(leagues.find(l => l.name === e.target.value))}>
                         {leagues.map((league) => (
-                            <option key={league.id} value={league.name}>{league.name}</option>
+                            <option key={league.id} value={league.name}>
+                                {league.name}
+                            </option>
                         ))}
                     </select>
                 </div>
                 {selectedLeague && (
                     <div className={`league-table ${theme}`}>
-                        <h2>{selectedLeague.name}</h2>
+                        <h2>
+                            <img src={leagueIcons[selectedLeague.name]} alt={selectedLeague.name} className="league-icon" />
+                            {selectedLeague.name}
+                        </h2>
                         <table>
                             <thead>
                             <tr>
@@ -96,9 +100,8 @@ const Leagues = () => {
                                 } else if (position >= selectedLeagueStandings.length - 2) {
                                     positionClass = "bottom-three";
                                 } else {
-                                    positionClass = "other-place"
+                                    positionClass = "other-place";
                                 }
-
 
                                 return (
                                     <tr key={standing.id}>
@@ -117,7 +120,6 @@ const Leagues = () => {
                                 );
                             })}
                             </tbody>
-
                         </table>
                     </div>
                 )}
