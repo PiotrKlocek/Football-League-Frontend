@@ -2,11 +2,14 @@ import './Teams.css';
 import Navbar from "../Navbar/Navbar.jsx";
 import React, { useCallback, useEffect, useState } from "react";
 
+
 const Teams = () => {
     const [leagues, setLeagues] = useState([]);
     const [selectedLeague, setSelectedLeague] = useState(null);
     const [teams, setTeams] = useState([]);
-    const [standings, setStandings] = useState(null);
+    const [players, setPlayers] = useState([]);
+    const [standings, setStandings] = useState([]);
+
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [theme, setTheme] = useState("dark");
 
@@ -47,11 +50,25 @@ const Teams = () => {
         }
     }, []);
 
+    const fetchPlayers = useCallback(async () => {
+        try{
+            const response = await fetch("http://localhost:8080/api/player");
+            if (!response.ok) throw new Error(`Błąd pobierania danych: ${response.status}`);
+
+            const data = await response.json();
+            console.log(players);
+            setPlayers(data);
+        } catch (error) {
+            console.error("Bład pobierania danych:", error);
+        }
+    },[]);
+
     useEffect(() => {
         fetchLeagues();
         fetchTeams();
         fetchStandings();
-    }, [fetchLeagues, fetchTeams, fetchStandings]);
+        fetchPlayers();
+    }, [fetchLeagues, fetchTeams, fetchStandings,fetchPlayers]);
 
     useEffect(() => {
         if (selectedLeague) {
@@ -61,6 +78,10 @@ const Teams = () => {
             }
         }
     }, [selectedLeague, teams]);
+
+    const selectedLeagueStandings = selectedLeague
+        ? standings.filter(standing => standing.league.id === selectedLeague.id)
+        : [];
 
     return (
         <div>
@@ -103,6 +124,57 @@ const Teams = () => {
                         </label>
                     )}
                 </div>
+
+                <div className="players-table">
+                    <table className="league-team-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>PKT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {selectedLeagueStandings.sort((a, b) => b.points - a.points).map((standing, index) => {
+                            const position = index + 1;
+                            let positionClass = "";
+
+                            if (position <= 3) {
+                                positionClass = "top-three";
+                            } else if (position === 4) {
+                                positionClass = "fourth-place";
+                            } else if (position >= selectedLeagueStandings.length - 2) {
+                                positionClass = "bottom-three";
+                            } else {
+                                positionClass = "other-place";
+                            }
+
+                            return (
+                                <tr
+                                    key={standing.id}
+                                    className={`${standing.team.id === selectedTeam?.id ? "selected-team-row" : ""} ${positionClass}`}
+                                >
+
+                                    <td>
+                                        <span className={`position-circle ${positionClass}`}>{position}</span>
+                                    </td>
+                                    <td>{standing.team.name}</td>
+                                    <td>{standing.matchesPlayed}</td>
+                                    <td>{standing.wins}</td>
+                                    <td>{standing.draws}</td>
+                                    <td>{standing.losses}</td>
+                                    <td>{standing.points}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     );
