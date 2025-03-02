@@ -1,0 +1,99 @@
+.teams-container.dark {
+    position: absolute;
+    margin-top: 10vh;
+    left: 0;
+    right: 0;
+    width: 90%;
+    padding: 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.teams-container.light {
+    position: absolute;
+    margin-top: 10vh;
+    left: 0;
+    right: 0;
+    width: 90%;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.league-select {
+    margin-bottom: 20px;
+    color: #eaeaea;
+}
+
+.league-select label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.league-select select {
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #797979;
+}
+
+.league-select option{
+    color: #333333;
+}
+
+.team-select {
+    margin-bottom: 20px;
+    color: #eaeaea;
+}
+
+.team-select label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.team-select select {
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #797979;
+}
+
+.league-select select option {
+    background-color: #dedede;
+    color: #292929;
+}
+
+.team-select select option {
+    background-color: #dedede;
+    color: #292929;
+}
+
+.selectors{
+    display: flex;
+    gap: 10vh;
+    align-items: center;
+}
+
+.selectors.light label{
+    color: #292929;
+    font-weight: 500;
+}
+
+.league-select, .team-select {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-team-label {
+    font-size: 36px;
+}

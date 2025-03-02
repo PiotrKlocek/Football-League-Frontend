@@ -20,6 +20,8 @@ const Navbar = ({ setTheme }) => {
     const home = () => navigate("/homepage");
     const leagues = () => navigate("/leagues");
 
+    const teams = () => navigate("/teams");
+
 
     const handleSearch = async (e) => {
         setSearchTerm(e.target.value);
@@ -42,7 +44,7 @@ const Navbar = ({ setTheme }) => {
             <ul className="links">
                 <li onClick={home}>Home</li>
                 <li onClick={leagues}>Leagues</li>
-                <li>Teams</li>
+                <li onClick={teams}>Teams</li>
                 <li>Players</li>
                 <li>Referees</li>
             </ul>

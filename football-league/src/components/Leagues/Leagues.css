@@ -36,14 +36,13 @@
     color: #333333;
 }
 
-
 .league-table.dark {
     background-color: #292929;
     padding: 20px;
     border-radius: 10px;
 }
 .league-table.light{
-    background-color: #eaeaea;
+    background-color: #e8e8e8;
     padding: 20px;
     border-radius: 10px;
 }
@@ -112,8 +111,8 @@
 }
 
 .league-table.light th {
-    background-color: #eaeaea;
-    color: #292929;
+    background-color: #4c00b4;
+    color: #ffffff;
 }
 
 .league-table.light td {
@@ -152,4 +151,11 @@
 
 .other-place {
     color: #292929;
+}
+.league-selector select option {
+    background-color: #dedede;
+    color: #292929;
+}
+.league-container.light label{
+    color: black;
 }
