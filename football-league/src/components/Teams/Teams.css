@@ -78,25 +78,57 @@
     color: #292929;
 }
 
-.selectors{
+.selectors {
     display: flex;
-    gap: 10vh;
+    gap: 2vh;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #292929;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .selectors.light label{
     color: #292929;
     font-weight: 500;
+    font-size: 36px;
 }
 
+.selectors.dark label{
+    font-size: 36px;
+}
 .league-select, .team-select {
     display: flex;
     flex-direction: column;
 }
 
-.selected-team-label {
+.teams-info {
+    background-color: #797979;
     font-size: 36px;
+    height: 15vh;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    width: 30%;
 }
+
+.league-name-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px!important;
+}
+
+.league-logo {
+    width: 24px;
+    height: auto;
+}
+
+.team-info label {
+    display: block;
+}
+
 
 .league-team-table{
     background-color: #e8e8e8;

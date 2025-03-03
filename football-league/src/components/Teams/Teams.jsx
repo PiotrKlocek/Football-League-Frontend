@@ -1,8 +1,15 @@
 import './Teams.css';
 import Navbar from "../Navbar/Navbar.jsx";
 import React, { useCallback, useEffect, useState } from "react";
-
-
+const leagueIcons = {
+    "Premier League": "/public/premier-league-logo.png",
+    "La Liga": "/public/la-liga-logo.png",
+    "Serie A": "/public/serie-a-logo.png",
+    "Bundesliga": "/public/bundesliga-logo.png",
+    "Ligue 1": "/public/Ligue1-logo.png",
+    "Champions League" : "/uefa-champions-league.png",
+    "Ekstraklasa" : "/ekstraklasa.png"
+};
 const Teams = () => {
     const [leagues, setLeagues] = useState([]);
     const [selectedLeague, setSelectedLeague] = useState(null);
@@ -89,7 +96,7 @@ const Teams = () => {
             <div className={`teams-container ${theme}`}>
                 <div className={`selectors ${theme}`}>
                     <div className={`league-select ${theme}`}>
-                        <label>Wybierz ligę: </label>
+                        <label>Select league: </label>
                         <select onChange={(e) => {
                             const selected = leagues.find(l => l.name === e.target.value);
                             setSelectedLeague(selected);
@@ -103,7 +110,7 @@ const Teams = () => {
                     </div>
 
                     <div className={`team-select ${theme}`}>
-                        <label>Wybierz drużynę: </label>
+                        <label>Select team: </label>
                         <select onChange={(e) => {
                             const selected = teams.find(t => t.name === e.target.value);
                             setSelectedTeam(selected);
@@ -119,15 +126,23 @@ const Teams = () => {
                     </div>
 
                     {selectedTeam && (
-                        <label className="selected-team-label">
-                            <strong>{selectedTeam.name}</strong>
-                        </label>
+                        <div className="teams-info">
+                            <label>
+                                <strong>{selectedTeam.name}</strong>
+                            </label>
+                            <label className="league-name-info">
+                                <strong>{selectedLeague.name}</strong>
+                                <img src={leagueIcons[selectedLeague.name]} alt={selectedLeague.name}
+                                     className="league-logo"/>
+                            </label>
+
+                        </div>
                     )}
                 </div>
 
                 <div className="players-table">
                     <table className="league-team-table">
-                        <thead>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Team</th>
