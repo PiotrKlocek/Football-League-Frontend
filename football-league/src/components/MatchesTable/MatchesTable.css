@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 .main-container {
     background-color: #e8e8e8;
     color: #333;
@@ -11,7 +12,7 @@
     flex-direction: column;
     transition: background-color 0.3s ease, color 0.3s ease;
     height: 80vh;
-
+    font-family: 'Poppins', sans-serif;
 }
 
 .main-container.dark {

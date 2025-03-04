@@ -18,6 +18,10 @@ const Leagues = () => {
     const [selectedLeague, setSelectedLeague] = useState(null);
     const [theme, setTheme] = useState("dark");
 
+    const getTeamEmblem = (teamId) => {
+        return `http://localhost:8080/api/teams/${teamId}/emblem`;
+    };
+
     const fetchLeagues = useCallback(async () => {
         try {
             const response = await fetch("http://localhost:8080/api/leagues");
@@ -78,14 +82,13 @@ const Leagues = () => {
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Drużyna</th>
-                                <th>Mecze</th>
-                                <th>Wygrane</th>
-                                <th>Remisy</th>
-                                <th>Porażki</th>
-                                <th>Strzelone</th>
-                                <th>Stracone</th>
-                                <th>Punkty</th>
+                                <th>Team</th>
+                                <th>M</th>
+                                <th>W</th>
+                                <th>D</th>
+                                <th>L</th>
+                                <th>Goals</th>
+                                <th>PTS</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -108,13 +111,19 @@ const Leagues = () => {
                                         <td>
                                             <span className={`position-circle ${positionClass}`}>{position}</span>
                                         </td>
-                                        <td>{standing.team.name}</td>
+                                        <div className="team-name-emblem">
+                                            <img
+                                                src={getTeamEmblem(standing.team.id)}
+                                                alt={`${standing.team.name} emblem`}
+                                                className="team-emblem"
+                                            />
+                                            {standing.team.name}
+                                        </div>
                                         <td>{standing.matchesPlayed}</td>
                                         <td>{standing.wins}</td>
                                         <td>{standing.draws}</td>
                                         <td>{standing.losses}</td>
-                                        <td>{standing.goalsScored}</td>
-                                        <td>{standing.goalsConceded}</td>
+                                        <td>{standing.goalsScored}:{standing.goalsConceded}</td>
                                         <td>{standing.points}</td>
                                     </tr>
                                 );

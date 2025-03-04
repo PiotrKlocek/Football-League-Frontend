@@ -159,3 +159,15 @@
 .league-container.light label{
     color: black;
 }
+
+.team-name-emblem {
+    display: flex;
+    align-items: center;
+}
+
+.team-emblem {
+    margin-top: 2vh;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}

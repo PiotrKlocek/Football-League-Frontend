@@ -20,6 +20,10 @@ const Teams = () => {
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [theme, setTheme] = useState("dark");
 
+    const getTeamEmblem = (teamId) => {
+        return `http://localhost:8080/api/teams/${teamId}/emblem`;
+    };
+
     const fetchLeagues = useCallback(async () => {
         try {
             const response = await fetch("http://localhost:8080/api/leagues");
@@ -177,7 +181,14 @@ const Teams = () => {
                                     <td>
                                         <span className={`position-circle ${positionClass}`}>{position}</span>
                                     </td>
-                                    <td>{standing.team.name}</td>
+                                    <div className="team-name-emblem">
+                                        <img
+                                            src={getTeamEmblem(standing.team.id)}
+                                            alt={`${standing.team.name} emblem`}
+                                            className="team-emblem"
+                                        />
+                                        {standing.team.name}
+                                    </div>
                                     <td>{standing.matchesPlayed}</td>
                                     <td>{standing.wins}</td>
                                     <td>{standing.draws}</td>
