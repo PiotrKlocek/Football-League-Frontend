@@ -45,7 +45,6 @@ const Navbar = ({ setTheme }) => {
                 <li onClick={home}>Home</li>
                 <li onClick={leagues}>Leagues</li>
                 <li onClick={teams}>Teams</li>
-                <li>Players</li>
                 <li>Referees</li>
             </ul>
             <div className="search-box">

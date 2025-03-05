@@ -131,13 +131,18 @@ const Teams = () => {
 
                     {selectedTeam && (
                         <div className="teams-info">
-                            <label>
+                            <label className="team-label">
+                                <img
+                                    src={getTeamEmblem(selectedTeam.id)}
+                                    alt={`${selectedTeam.name} emblem`}
+                                    className="team-emblem1"
+                                />
                                 <strong>{selectedTeam.name}</strong>
                             </label>
                             <label className="league-name-info">
-                                <strong>{selectedLeague.name}</strong>
                                 <img src={leagueIcons[selectedLeague.name]} alt={selectedLeague.name}
                                      className="league-logo"/>
+                                <strong>{selectedLeague.name}</strong>
                             </label>
 
                         </div>
@@ -146,7 +151,7 @@ const Teams = () => {
 
                 <div className="players-table">
                     <table className="league-team-table">
-                    <thead>
+                        <thead>
                         <tr>
                             <th>#</th>
                             <th>Team</th>
@@ -177,18 +182,21 @@ const Teams = () => {
                                     key={standing.id}
                                     className={`${standing.team.id === selectedTeam?.id ? "selected-team-row" : ""} ${positionClass}`}
                                 >
-
                                     <td>
                                         <span className={`position-circle ${positionClass}`}>{position}</span>
                                     </td>
-                                    <div className="team-name-emblem">
-                                        <img
-                                            src={getTeamEmblem(standing.team.id)}
-                                            alt={`${standing.team.name} emblem`}
-                                            className="team-emblem"
-                                        />
-                                        {standing.team.name}
-                                    </div>
+
+                                    <td>
+                                        <div className="team-name-emblem">
+                                            <img
+                                                src={getTeamEmblem(standing.team.id)}
+                                                alt={`${standing.team.name} emblem`}
+                                                className="team-emblem"
+                                            />
+                                            {standing.team.name}
+                                        </div>
+                                    </td>
+
                                     <td>{standing.matchesPlayed}</td>
                                     <td>{standing.wins}</td>
                                     <td>{standing.draws}</td>
@@ -198,9 +206,12 @@ const Teams = () => {
                             );
                         })}
                         </tbody>
-                    </table>
-                </div>
 
+                    </table>
+                    <div className={`players-container ${theme}`}>
+
+                    </div>
+                </div>
             </div>
         </div>
     );

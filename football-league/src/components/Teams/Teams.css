@@ -106,7 +106,7 @@
 .teams-info {
     background-color: #797979;
     font-size: 36px;
-    height: 15vh;
+    height: 25vh;
     border-radius: 10px;
     padding: 20px;
     text-align: left;
@@ -212,4 +212,30 @@
 
 .selected-team-row:hover {
     background-color: rgba(173, 160, 3, 0.5) !important;
+}
+.team-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.team-emblem1 {
+    width: 90px;
+    height: auto;
+    max-height: 120px;
+    margin-right: 1vh;
+}
+
+.players-table {
+    display: flex;
+    align-items: flex-start;
+}
+
+.players-container {
+    margin-left: 10vh;
+    margin-top: 6vh;
+    width: 60%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    color: black;
 }

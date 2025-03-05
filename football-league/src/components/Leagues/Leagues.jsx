@@ -111,14 +111,18 @@ const Leagues = () => {
                                         <td>
                                             <span className={`position-circle ${positionClass}`}>{position}</span>
                                         </td>
-                                        <div className="team-name-emblem">
-                                            <img
-                                                src={getTeamEmblem(standing.team.id)}
-                                                alt={`${standing.team.name} emblem`}
-                                                className="team-emblem"
-                                            />
-                                            {standing.team.name}
-                                        </div>
+
+                                        <td>
+                                            <div className="team-name-emblem">
+                                                <img
+                                                    src={getTeamEmblem(standing.team.id)}
+                                                    alt={`${standing.team.name} emblem`}
+                                                    className="team-emblem"
+                                                />
+                                                {standing.team.name}
+                                            </div>
+                                        </td>
+
                                         <td>{standing.matchesPlayed}</td>
                                         <td>{standing.wins}</td>
                                         <td>{standing.draws}</td>
@@ -129,6 +133,7 @@ const Leagues = () => {
                                 );
                             })}
                             </tbody>
+
                         </table>
                     </div>
                 )}
