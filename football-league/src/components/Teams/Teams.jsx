@@ -192,7 +192,10 @@ const Teams = () => {
                                 <tr
                                     key={standing.id}
                                     className={`${standing.team.id === selectedTeam?.id ? "selected-team-row" : ""} ${positionClass}`}
+                                    onClick={() => setSelectedTeam(standing.team)}
+                                    style={{cursor: "pointer"}}
                                 >
+
                                     <td>
                                         <span className={`position-circle ${positionClass}`}>{position}</span>
                                     </td>
@@ -221,22 +224,29 @@ const Teams = () => {
                     </table>
                     <div className="players-container">
                         <div className="players"><strong>Players</strong></div>
-                        <div className="players-grid">
-                            {players.map((player) => (
-                                <div key={player.id} className="player-tile">
-                                    <div className="player-info">
-                                        <img
-                                            src={getPlayerPhoto(player.id)}
-                                            alt={`${player.name} emblem`}
-                                            className="player-photo"
-                                        />
-                                        <p><strong>{player.name}</strong></p>
-                                        <p>Number:{player.number}</p>
-                                        <p>Position:{player.position}</p>
-                                    </div>
+                        {Object.entries(groupedPlayers).map(([position, players]) => (
+                            <div key={position} className="players-group">
+                                <h3 className="position">{position}</h3>
+                                <div className="players-grid">
+                                    {players.filter(player => player.team.id === selectedTeam.id)
+                                        .map(player => (
+                                            <div key={player.id} className="player-tile">
+                                                <div className="player-info">
+                                                    <div className="player-photo-wrapper">
+                                                        <img
+                                                            src={getPlayerPhoto(player.id)}
+                                                            alt={`${player.name} emblem`}
+                                                            className="player-photo"
+                                                        />
+                                                        <div className="player-number">{player.number}</div>
+                                                    </div>
+                                                    <p><strong>{player.name}</strong></p>
+                                                </div>
+                                            </div>
+                                        ))}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
 
                 </div>

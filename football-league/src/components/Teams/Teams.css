@@ -242,7 +242,7 @@
 
 .players-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 20px;
     padding: 10px;
 }
@@ -277,7 +277,35 @@
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.player-photo{
+.player-photo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.player-photo {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.player-number {
+    position: absolute;
+    bottom: 5px;
+    right: -3px;
+    background-color: #292929;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.position {
+    text-align: center;
 }
