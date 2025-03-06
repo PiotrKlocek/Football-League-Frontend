@@ -24,6 +24,17 @@ const Teams = () => {
         return `http://localhost:8080/api/teams/${teamId}/emblem`;
     };
 
+    const getPlayerPhoto = (playerId) => {
+        return `http://localhost:8080/api/player/${playerId}/photo`;
+    };
+
+    const groupedPlayers = {
+        Goalkeepers: players.filter(player => player.position === "Goalkeeper"),
+        Defenders: players.filter(player => player.position === "Defender"),
+        Midfielders: players.filter(player => player.position === "Midfielder"),
+        Forwards: players.filter(player => player.position === "Forward")
+    }
+
     const fetchLeagues = useCallback(async () => {
         try {
             const response = await fetch("http://localhost:8080/api/leagues");
@@ -208,9 +219,26 @@ const Teams = () => {
                         </tbody>
 
                     </table>
-                    <div className={`players-container ${theme}`}>
-
+                    <div className="players-container">
+                        <div className="players"><strong>Players</strong></div>
+                        <div className="players-grid">
+                            {players.map((player) => (
+                                <div key={player.id} className="player-tile">
+                                    <div className="player-info">
+                                        <img
+                                            src={getPlayerPhoto(player.id)}
+                                            alt={`${player.name} emblem`}
+                                            className="player-photo"
+                                        />
+                                        <p><strong>{player.name}</strong></p>
+                                        <p>Number:{player.number}</p>
+                                        <p>Position:{player.position}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

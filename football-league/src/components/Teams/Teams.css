@@ -234,8 +234,50 @@
     margin-left: 10vh;
     margin-top: 6vh;
     width: 60%;
-    padding: 10px;
     background-color: #f0f0f0;
     border-radius: 5px;
     color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.player-tile {
+    background-color: #e8e8e8;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.player-tile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.player-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.players{
+    background-color: #4c00b4;
+    color: #eaeaea;
+    height: 6vh;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    text-align: center;
+    font-size: x-large;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.player-photo{
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
