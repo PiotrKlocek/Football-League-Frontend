@@ -1,19 +1,17 @@
-
+/* index.css */
 html, body {
   height: 100%;
-
+  margin: 0;
+  padding: 0;
 }
-
 
 body {
-
-  background: linear-gradient(#2A00B7,#42006C);
+  background: #2A00B7;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
+#root {
+  height: 100%;
 }
