@@ -10,6 +10,23 @@ const leagueIcons = {
     "Champions League" : "/uefa-champions-league.png",
     "Ekstraklasa" : "/ekstraklasa.png"
 };
+
+const playerFlag = {
+    "Poland": "/public/Poland.png",
+    "Brazil": "/public/Brazil.png",
+    "Argentina": "/public/Argentina.png",
+    "Germany": "/public/Germany.png",
+    "France": "/public/France.png",
+    "Italy": "/public/Italy.png",
+    "Spain": "/public/Spain.png",
+    "England": "/public/England.png",
+    "Portugal": "/public/Portugal.png",
+    "Netherlands": "/public/Netherlands.png",
+    "Belgium": "/public/Belgium.png",
+    "Uruguay": "/public/Uruguay.png",
+    "Croatia": "/public/Croatia.png",
+    "Denmark": "/public/Denmark.png"
+}
 const Teams = () => {
     const [leagues, setLeagues] = useState([]);
     const [selectedLeague, setSelectedLeague] = useState(null);
@@ -78,7 +95,6 @@ const Teams = () => {
             if (!response.ok) throw new Error(`Błąd pobierania danych: ${response.status}`);
 
             const data = await response.json();
-            console.log(players);
             setPlayers(data);
         } catch (error) {
             console.error("Bład pobierania danych:", error);
@@ -241,7 +257,15 @@ const Teams = () => {
                                                         <div className="player-number">{player.number}</div>
                                                     </div>
                                                     <p><strong>{player.name}</strong></p>
+                                                    <div className="flag-container">
+                                                        <img
+                                                            src={playerFlag[player.nationality]}
+                                                            alt={player.nationality}
+                                                            className="player-flag"
+                                                        />
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         ))}
                                 </div>
