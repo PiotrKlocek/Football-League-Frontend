@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Leagues.css";
 import Navbar from "../Navbar/Navbar";
+import {useNavigate} from "react-router-dom";
 
 const leagueIcons = {
     "Premier League": "/public/premier-league-logo.png",
@@ -20,6 +21,13 @@ const Leagues = () => {
 
     const getTeamEmblem = (teamId) => {
         return `http://localhost:8080/api/teams/${teamId}/emblem`;
+    };
+
+    const navigate = useNavigate();
+
+    const handleTeamClick = (team) => {
+        navigate("/teams");
+        localStorage.setItem("selectedTeamId", team.id);
     };
 
     const fetchLeagues = useCallback(async () => {
@@ -93,6 +101,7 @@ const Leagues = () => {
                             </thead>
                             <tbody>
                             {selectedLeagueStandings.sort((a, b) => b.points - a.points).map((standing, index) => {
+
                                 const position = index + 1;
                                 let positionClass = "";
 
@@ -107,7 +116,10 @@ const Leagues = () => {
                                 }
 
                                 return (
-                                    <tr key={standing.id}>
+                                    <tr
+                                        key={standing.id}
+                                        onClick={() => handleTeamClick(standing.team)}
+                                    >
                                         <td>
                                             <span className={`position-circle ${positionClass}`}>{position}</span>
                                         </td>

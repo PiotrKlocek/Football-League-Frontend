@@ -33,9 +33,12 @@ const Teams = () => {
     const [teams, setTeams] = useState([]);
     const [players, setPlayers] = useState([]);
     const [standings, setStandings] = useState([]);
-
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [theme, setTheme] = useState("dark");
+    const [selectedTeamId, setSelectedTeamId] = useState(() => {
+        return localStorage.getItem("selectedTeamId") || null;
+    });
+
 
     const getTeamEmblem = (teamId) => {
         return `http://localhost:8080/api/teams/${teamId}/emblem`;
@@ -117,6 +120,23 @@ const Teams = () => {
         }
     }, [selectedLeague, teams]);
 
+    useEffect(() => {
+        if (selectedTeamId) {
+            localStorage.setItem("selectedTeamId", selectedTeamId);
+        }
+    }, [selectedTeamId]);
+
+    useEffect(() => {
+        if (selectedTeamId && teams.length > 0) {
+            const team = teams.find(t => t.id === parseInt(selectedTeamId));
+            setSelectedTeam(team || null);
+        }
+    }, [selectedTeamId, teams]);
+
+    const handleTeamSelect = (teamId) => {
+        setSelectedTeamId(teamId);
+    };
+
     const selectedLeagueStandings = selectedLeague
         ? standings.filter(standing => standing.league.id === selectedLeague.id)
         : [];
@@ -144,8 +164,12 @@ const Teams = () => {
                         <label>Select team: </label>
                         <select onChange={(e) => {
                             const selected = teams.find(t => t.name === e.target.value);
-                            setSelectedTeam(selected);
+                            if (selected) {
+                                setSelectedTeam(selected);
+                                setSelectedTeamId(selected.id);
+                            }
                         }}>
+
                             {teams
                                 .filter(team => team.leagueId === selectedLeague?.id)
                                 .map((team) => (
@@ -176,8 +200,8 @@ const Teams = () => {
                     )}
                 </div>
 
-                <div className="players-table">
-                    <table className="league-team-table">
+                <div className={`players-table ${theme}`}>
+                    <table className={`league-team-table ${theme}`}>
                         <thead>
                         <tr>
                             <th>#</th>
@@ -206,10 +230,8 @@ const Teams = () => {
 
                             return (
                                 <tr
-                                    key={standing.id}
-                                    className={`${standing.team.id === selectedTeam?.id ? "selected-team-row" : ""} ${positionClass}`}
-                                    onClick={() => setSelectedTeam(standing.team)}
-                                    style={{cursor: "pointer"}}
+                                    onClick={() => handleTeamSelect(standing.team.id)}
+                                    className={standing.team.id === Number(selectedTeamId) ? "selected-team-row" : ""}
                                 >
 
                                     <td>
@@ -238,8 +260,8 @@ const Teams = () => {
                         </tbody>
 
                     </table>
-                    <div className="players-container">
-                        <div className="players"><strong>Players</strong></div>
+                    <div className={`players-container ${theme}`}>
+                        <div className={`players ${theme}`}><strong>Players</strong></div>
                         {Object.entries(groupedPlayers).map(([position, players]) => (
                             <div key={position} className="players-group">
                                 <h3 className="position">{position}</h3>
