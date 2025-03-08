@@ -21,6 +21,7 @@ const Navbar = ({ setTheme }) => {
     const leagues = () => navigate("/leagues");
 
     const teams = () => navigate("/teams");
+    const referees = () => navigate("/referees");
 
 
     const handleSearch = async (e) => {
@@ -45,7 +46,7 @@ const Navbar = ({ setTheme }) => {
                 <li onClick={home}>Home</li>
                 <li onClick={leagues}>Leagues</li>
                 <li onClick={teams}>Teams</li>
-                <li>Referees</li>
+                <li onClick={referees}>Referees</li>
             </ul>
             <div className="search-box">
                 <input type="text" placeholder="Search" value={searchTerm} onChange={handleSearch} />
