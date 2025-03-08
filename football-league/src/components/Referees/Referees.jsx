@@ -7,6 +7,29 @@ const Referees = () => {
     const [theme, setTheme] = useState("dark");
     const [matchesCount, setMatchesCount] = useState({});
 
+    const refereeFlag = {
+        "Poland": "/public/Poland.png",
+        "Brazil": "/public/Brazil.png",
+        "Argentina": "/public/Argentina.png",
+        "Germany": "/public/Germany.png",
+        "France": "/public/France.png",
+        "Italy": "/public/Italy.png",
+        "Spain": "/public/Spain.png",
+        "England": "/public/England.png",
+        "Portugal": "/public/Portugal.png",
+        "Netherlands": "/public/Netherlands.png",
+        "Belgium": "/public/Belgium.png",
+        "Uruguay": "/public/Uruguay.png",
+        "Croatia": "/public/Croatia.png",
+        "Turkey": "/public/Turkey.png",
+        "Sweden": "/public/Sweden.png",
+        "Scotland": "/public/Scotland.png",
+        "Slovenia": "/public/Slovenia.png",
+        "Czech Republic": "/public/CzechRepublic.png",
+        "Russia": "/public/Russia.png",
+        "Denmark": "/public/Denmark.png"
+    }
+
     const getRefereePhoto = (refereeId) => {
         return `http://localhost:8080/api/referees/${refereeId}/photo`;
     };
@@ -60,10 +83,21 @@ const Referees = () => {
             <div className="referees-list">
                 {referees.map((referee) => (
                     <div key={referee.id} className="referee-card">
-                        <img src={getRefereePhoto(referee.id)} alt={`${referee.first_name} ${referee.last_name} photo`} className="referee-photo" />
+                        <img
+                            src={getRefereePhoto(referee.id)}
+                            alt={`${referee.firstName} ${referee.lastName} photo`}
+                            className="referee-photo"
+                        />
                         <div className="referee-info">
                             <h3>{referee.firstName + " " + referee.lastName}</h3>
                             <p><strong>Matches:</strong> {matchesCount[referee.id] || 'Loading...'}</p>
+                            <div className="flag-container">
+                                <img
+                                    src={refereeFlag[referee.nationality]}
+                                    alt={referee.nationality}
+                                    className="player-flag"
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
