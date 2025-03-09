@@ -91,11 +91,11 @@ const Referees = () => {
                         <div className="referee-info">
                             <h3>{referee.firstName + " " + referee.lastName}</h3>
                             <p><strong>Matches:</strong> {matchesCount[referee.id] || 'Loading...'}</p>
-                            <div className="flag-container">
+                            <div className="flag-container1">
                                 <img
                                     src={refereeFlag[referee.nationality]}
                                     alt={referee.nationality}
-                                    className="player-flag"
+                                    className="player-flag1"
                                 />
                             </div>
                         </div>
